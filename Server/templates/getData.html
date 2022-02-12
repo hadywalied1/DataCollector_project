@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <style>
+        table {
+            display: block;
+            overflow: scroll;
+            
+        }
+
+        thead {
+            border: 5px solid;
+            border-color: rgb(236, 232, 232);
+        }
+
+        td,
+        th {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .dwnbtn {
+            width: 10%;
+            height: 5%;
+
+        }
+
+        .left {
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .right {
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .header {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 40px;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        #logo1 {
+            border-radius: 50%;
+
+        }
+
+        #name {
+            padding-left: 70px;
+            padding-right: 70px;
+        }
+
+        .bg-4 {
+            background-color: #2f2f2f;
+            color: #ffffff;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="column" style="width: 99%; ">
+        <div class=" row " >
+            <nav class="navbar navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <button class="btn btn-success" onclick='location.href = "/download_excel"' type="button">
+                        <span>تنزيل البيانات</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        <div class=" row ">
+            <div class="left col-lg-4 col-sm-4"><img src="../static/logo.png" width="150px" height="150px" alt=""></div>
+            <div class="header col-lg-4 col-sm-4">بيانات المختبرين</div>
+            <div class="right col-lg-4 col-sm-4"><img src="../static/logo2.png" id="logo1" width="150px" height="150px" alt="">
+            </div>
+            <hr style="margin-top:10px;">
+        </div>
+
+        <div class="row">
+            <div class="table-responsive col-lg-12">
+                <table class="table table-bordered "height="650px">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th colspan="2">بيانات المختبرين</th>
+                            <th colspan="7">الإختبارات البدنية</th>
+                            <th colspan="28">الإختبارات العملية</th>
+
+                        </tr>
+
+                        <tr>
+                            <th></th>
+                            <th colspan="2"></th>
+                            <th colspan="2">جهاز التناسق</th>
+                            <th colspan="2">جهاز بذل الجهد</th>
+                            <th colspan="3">جهاز قياس قوة القبضة والظهر والقدمين</th>
+                            <th colspan="10">جهاز ثبات اليد</th>
+                            <th colspan="4">جهاز قياس شدة السمع </th>
+                            <th colspan="4">جهاز ادراك العمق</th>
+                            <th colspan="10">تآزر الذراعين </th>
+                        </tr>
+
+                        <tr>
+                            <th></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="3"></th>
+
+
+                            <th colspan="3">الإختبار الأول</th>
+                            <th colspan="3">الإختبار الثاني</th>
+                            <th colspan="3">الإختبار الثالث</th>
+
+                            <th>الدرجة </th>
+
+
+                            <th colspan="2">الأذن اليمني</th>
+                            <th colspan="2">الأذن اليسري</th>
+                            <th colspan="4"></th>
+
+                            <th colspan="3">الإختبار الأول</th>
+                            <th colspan="3">الإختبار الثاني</th>
+                            <th colspan="3">الإختبار الثالث</th>
+                            <th>الدرجة </th>
+
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>الرقم العسكري</th>
+                            <th id="name">الاسم</th>
+                            <th>الطول</th>
+                            <th>الوزن</th>
+                            <th>زمن</th>
+                            <th>درجة</th>
+                            <th>قبضة اليد اليمني</th>
+                            <th>قبضة اليد اليسري</th>
+                            <th>الظهر والقدمين</th>
+                            <th>عدد الأخطاء</th>
+                            <th>الزمن الكلي للأخطاء</th>
+                            <th>المتوسط</th>
+                            <th>عدد الأخطاء</th>
+                            <th>الزمن الكلي للأخطاء</th>
+                            <th>المتوسط</th>
+                            <th>عدد الأخطاء</th>
+                            <th>الزمن الكلي للأخطاء</th>
+                            <th>المتوسط</th>
+                            <th></th>
+                            <th>عدد النغمات المسموعة</th>
+                            <th>الدرجة</th>
+                            <th>عدد النغمات المسموعة</th>
+                            <th>الدرجة</th>
+
+                            <th>المحاولة التدريبية</th>
+                            <th>المحاولة الأختبارية</th>
+                            <th> 2المحاولة الأختبارية</th>
+                            <th>الدرجة المعيارية </th>
+
+                            <th>عدد الأخطاء</th>
+                            <th>الزمن الكلي للأخطاء</th>
+                            <th>المتوسط</th>
+                            <th>عدد الأخطاء</th>
+                            <th>الزمن الكلي للأخطاء</th>
+                            <th>المتوسط</th>
+                            <th>عدد الأخطاء</th>
+                            <th>الزمن الكلي للأخطاء</th>
+                            <th>المتوسط</th>
+                            <th></th>
+                        </tr>
+
+
+                    </thead>
+                    <tbody>
+
+                        {%for i in range(0, len)%}
+                        <tr>
+                            <th>{{i+1}}</th>
+
+                            <td>
+                                {{Data[i].id}}
+                            </td>
+
+                            <td>
+                                {% if Data[i].name == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].name}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].height == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].height}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].weight == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].weight}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].leftHandGripData == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].leftHandGripData}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].rightHandGripData == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].rightHandGripData}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].legsAndBackData == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].legsAndBackData}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].effortMarkData == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].effortMarkData}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].effortTimeData == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].effortTimeData}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].firstWrongCount == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].firstWrongCount}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].firstTotalTime == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].firstTotalTime}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].firstAvg == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].firstAvg}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].secondWrongCount == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].secondWrongCount}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].secondTotalTime == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].secondTotalTime}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].secondAvg == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].secondAvg}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].thirdWrongCount == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].thirdWrongCount}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].thirdTotalTime == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].thirdTotalTime}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].thirdAvg == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].thirdAvg}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].handStabilityDegree == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].handStabilityDegree}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].rightEarDegree == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].rightEarDegree}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].rightEarTones == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].rightEarTones}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].leftEarDegree == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].leftEarDegree}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].leftEarTones == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].leftEarTones}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].depthTrialTrain == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].depthTrialTrain}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].depthTrial1 == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].depthTrial1}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].depthTrial2 == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].depthTrial2}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].depthData == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].depthData}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].firstArmsErrors == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].firstArmsErrors}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].firstArmsTime == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].firstArmsTime}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].firstArmsAverage == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].firstArmsAverage}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].secondArmsErrors == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].secondArmsErrors}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].secondArmsTime == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].secondArmsTime}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].secondArmsAverage == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].secondArmsAverage}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].thirdArmsErrors == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].thirdArmsErrors}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].thirdArmsTime == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].thirdArmsTime}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].thirdArmsAverage == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].thirdArmsAverage}}
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if Data[i].armsData == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].armsData}}
+                                {% endif %}
+                            </td>
+
+
+                        </tr>
+                        {%endfor%}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer class="container-fluid bg-4 text-center">
+            <p>copy right 2022 &copy;</p>
+        </footer>
+    </div>
+
+
+</body>
+
+</html>
