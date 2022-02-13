@@ -156,6 +156,7 @@ class handStability:
         if self.device_connected:
             t1=th.Thread(target=self.start_lestining,args=(self.test_counters,self.test_times,self.test_averages,self.test_counter))
             self.stop_thread = False
+            t1.daemon = True
             t1.start()
         test_label = ttk.Label(self.main, text=f"الاختبار {self.tests[self.test_counter]}",font = self.addressFont)
         self.test_counter+=1

@@ -69,6 +69,7 @@ class DepthRecognintion:
         else:
             self.result_btn()  
         t1 = th.Thread(target=self.get_depth_data, args=(self.test_counter))
+        t1.daemon = True
         t1.start()   
               
     def get_depth_data(self, test_count):
