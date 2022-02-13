@@ -12634,3 +12634,32 @@ GUI/05- Depth recognition/build/depth/warn-depth.txt
 GUI/05- Depth recognition/build/depth/xref-depth.html
 .gitignore
 GUI/06- Effort/effort.spec
+GUI/01- Weight and Height/__pycache__/Global_var.cpython-38.pyc
+GUI/01- Weight and Height/__pycache__/GUI_Template.cpython-38.pyc
+GUI/01- Weight and Height/__pycache__/Helper_module.cpython-38.pyc
+.gitignore
+build/depth/Analysis-00.toc
+build/depth/base_library.zip
+build/depth/depth.exe.manifest
+build/depth/depth.pkg
+build/depth/PKG-00.toc
+build/depth/PYZ-00.pyz
+build/depth/PYZ-00.toc
+build/depth/Tree-00.toc
+build/depth/Tree-01.toc
+build/depth/Tree-02.toc
+build/depth/warn-depth.txt
+build/depth/xref-depth.html
+.gitignore
+GUI/05- Depth recognition/__pycache__/Global_var.cpython-38.pyc
+GUI/05- Depth recognition/__pycache__/GUI_Template.cpython-38.pyc
+GUI/05- Depth recognition/__pycache__/Helper_module.cpython-38.pyc
+GUI/06- Effort/__pycache__/Global_var.cpython-38.pyc
+GUI/06- Effort/__pycache__/GUI_Template.cpython-38.pyc
+GUI/06- Effort/__pycache__/Helper_module.cpython-38.pyc
+GUI/07-Hand and Legs/__pycache__/Global_var.cpython-38.pyc
+GUI/07-Hand and Legs/__pycache__/GUI_Template.cpython-38.pyc
+GUI/07-Hand and Legs/__pycache__/Helper_module.cpython-38.pyc
+dist/depth.exe
+docs/~WRL0005.tmp
+depth.spec

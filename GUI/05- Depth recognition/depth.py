@@ -29,7 +29,8 @@ class DepthRecognintion:
         self.main = main
         self.labelFont = tkFont.Font(family="Arabic Typesetting", size=16, weight="bold") 
         self.addressFont = tkFont.Font(family="Andalus", size=20, weight="bold") 
-         
+        
+    
     def window(self):
         self.main.title("اختبار ادراك العمق")   
         self.main.geometry("600x300")
@@ -44,7 +45,7 @@ class DepthRecognintion:
             self.next_frame = GUI_Template.InforamtionPage(self.main,self,True)
             transete(self.main,self.next_frame)
             self.reset()
-    
+            
     def reset(self):
         self.se = None 
         self.test_counter = [0]
@@ -108,14 +109,14 @@ class DepthRecognintion:
     def result_window(self):
         clear_window(self.main)
         adress_label = ttk.Label(self.main, text="النتيجة",font = self.addressFont)
-        id_label = ttk.Label(self.main, text=f"{Global_var.mil_id} :الرقم العسكري",font = self.labelFont).place(x = 300,y = 50)
-        name_label = ttk.Label(self.main, text=":الاسم",font = self.labelFont).place(x = 457,y = 75)
-        name_content_l = tk.Label(self.main, text=f"{Global_var.name}", font=self.labelFont).place(x=300, y=75)
+        id_label = ttk.Label(self.main, text=f"{Global_var.mil_id} :الرقم العسكري",font = self.labelFont).place(x = 240,y = 50)
+        name_label = ttk.Label(self.main, text=f"الاسم: {Global_var.name}",font = self.labelFont).place(x = 260,y = 75)
+        
         label1 = ttk.Label(self.main, text=":المحاولة التجريبية",font = self.labelFont).place(x=380, y= 100)
         num1 = ttk.Label(self.main, text=self.data_trial,font = self.labelFont).place(x=340, y= 100)                      
         label2 = ttk.Label(self.main, text=":المحاولة الاختبارية",font = self.labelFont).place(x=380, y= 125)
         num2 = ttk.Label(self.main, text=self.data_test[0],font = self.labelFont).place(x=340, y= 125)
-        label2 = ttk.Label(self.main, text=":المحاولة الاختبارية*2",font = self.labelFont).place(x=380, y= 150)
+        label2 = ttk.Label(self.main, text=":المحاولة الاختبارية*2",font = self.labelFont).place(x=360, y= 150)
         num2 = ttk.Label(self.main, text=self.data_test[1],font = self.labelFont).place(x=340, y= 150)   
         adress_label.place(x=250, y=15)
         res_label = ttk.Label(self.main, text=f"{self.data_test[2]} :الدرجة",font = self.addressFont).place(x = 350,y = 175)

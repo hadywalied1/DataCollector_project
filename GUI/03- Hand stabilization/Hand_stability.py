@@ -30,7 +30,7 @@ class handStability:
     device_connected = True
     def __init__(self,main):
         self.main = main
-        #self.se = ser.Serial('COM11', 9600, timeout=1)
+        
 ######################################GUI#########################################        
     def window(self):
         self.main.title("ثبات الذراعين")
@@ -38,7 +38,7 @@ class handStability:
         self.labelFont = tkFont.Font(family="Arabic Typesetting", size=16, weight="bold") 
         self.addressFont = tkFont.Font(family="Andalus", size=20, weight="bold")
         self.main.minsize(600,300)
-        self.main.maxsize(600,300)
+        self.main.maxsize(600,300) 
         try:
             self.se = ser.Serial(f'COM{Global_var.COMport}', 9600, timeout=1)
             self.test_window()
@@ -47,9 +47,8 @@ class handStability:
             messagebox.showerror("خطأ","البرنامج لا يرى جهاز الأردوينو تأكد من ان الجهاز متصل او ان رقم البورت صحيح")
             self.next_frame = GUI_Template.InforamtionPage(self.main,self,True)
             transete(self.main,self.next_frame)
-            self.reset()
-           
-    
+            self.reset() 
+        
     def reset(self):
         self.test_counter = 0
         self.test_counters = [0,0,0,0]
@@ -106,10 +105,10 @@ class handStability:
             self.grade_window(gradee)
 
     def grade_window(self,grade):
-            id_label = ttk.Label(self.main, text=f"{Global_var.mil_id} :الرقم العسكري",font = self.labelFont).place(x = 300,y = 50)
-            name_label = ttk.Label(self.main, text=":الاسم",font = self.labelFont).place(x = 457,y = 75)
+            id_label = ttk.Label(self.main, text=f"{Global_var.mil_id} :الرقم العسكري",font = self.labelFont).place(x = 260,y = 50)
+            name_label = ttk.Label(self.main, text=":الاسم",font = self.labelFont).place(x = 484,y = 75)
             name_content_l = ttk.Label(self.main, text=f"{Global_var.name}", font=self.labelFont).place(x=300, y=75)
-            label1 = ttk.Label(self.main, text=":متوسط عدد الاخطاء",font = self.labelFont).place(x=380, y= 100)
+            label1 = ttk.Label(self.main, text=":متوسط عدد الاخطاء",font = self.labelFont).place(x=383, y= 100)
             num1 = ttk.Label(self.main, text=self.tot_err_avg,font = self.labelFont).place(x=340, y= 100)                      
             label2 = ttk.Label(self.main, text=":متوسط زمن الاخطاء",font = self.labelFont).place(x=380, y= 125)
             num2 = ttk.Label(self.main, text="{:.2f}".format(self.tot_time_avg),font = self.labelFont).place(x=340, y= 125)
@@ -147,25 +146,32 @@ class handStability:
                 self.error_text.insert(0,count[idx])
                 self.error_time_text.insert(0,"{:.2f}".format(average[idx]))
 
-                                    
+                               
     def test_window(self):
         self.error_text = ttk.Entry(self.main,width=5)
-        self.error_text.place(x = 365,y = 125)
+        self.error_text.place(x = 400,y = 125)
         self.error_time_text = ttk.Entry(self.main,width=5)
-        self.error_time_text.place(x = 200,y = 125)
-        if self.device_connected:
+        self.error_time_text.place(x = 170,y = 125)
+        '''if self.device_connected:
             t1=th.Thread(target=self.start_lestining,args=(self.test_counters,self.test_times,self.test_averages,self.test_counter))
             self.stop_thread = False
             t1.daemon = True
             t1.start()
+        '''
+        
         test_label = ttk.Label(self.main, text=f"الاختبار {self.tests[self.test_counter]}",font = self.addressFont)
         self.test_counter+=1
-        id_label = ttk.Label(self.main, text=f"{Global_var.mil_id} :الرقم العسكري",font = self.labelFont).place(x = 380,y = 50)
-        name_label = ttk.Label(self.main, text=":الاسم",font = self.labelFont).place(x = 500,y = 75)
-        name_content_l = ttk.Label(self.main, text=f"{Global_var.name}", font=self.labelFont).place(x=380, y=75)
+        id_label = ttk.Label(self.main, text=f"{Global_var.mil_id} :الرقم العسكري",font = self.labelFont)
+        id_label.place(x = 275,y = 50)
+        name_label = ttk.Label(self.main, text=":الاسم",font = self.labelFont)
+        name_label.place(x = 500,y = 85)
+        name_content_l = ttk.Label(self.main, text=f"{Global_var.name}", font=self.labelFont)
+        name_content_l.place(x=300, y=85)
         test_label.pack()                       
-        error_num = (ttk.Label(self.main, text="عدد الاخطاء",font = self.labelFont)).place(x=430, y= 125)
-        error_time_label = (tk.Label(self.main, text="متوسط زمن الخطأ",font = self.labelFont)).place(x=260, y= 125)
+        error_num = (ttk.Label(self.main, text=":عدد الاخطاء",font = self.labelFont))
+        error_num.place(x=460, y= 125)
+        error_time_label = (tk.Label(self.main, text=":متوسط زمن الخطأ",font = self.labelFont))
+        error_time_label.place(x=220, y=125)
         next_test_btn = ttk.Button(self.main,text="الاختبار التالي",width=10, command=self.exit_btn)
         grade_btn = ttk.Button(self.main,text="اظهار النتيجة",width=10,command= self.grade_btn_action)   
         if self.test_counter < 4:

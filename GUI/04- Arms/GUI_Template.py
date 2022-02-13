@@ -71,7 +71,7 @@ class InforamtionPage:
     def set_com(self,com_entry):
         com= com_entry.get()
         self.default_server_address = com
-        Global_var.ip = com
+        Global_var.COMport = com
         writeCOM(com)
                     
     def ip_window(self):
