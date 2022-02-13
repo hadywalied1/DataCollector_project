@@ -69,7 +69,6 @@ class DepthRecognintion:
         else:
             self.result_btn()  
         t1 = th.Thread(target=self.get_depth_data, args=(self.test_counter))
-        t1.daemon = True
         t1.start()   
               
     def get_depth_data(self, test_count):
@@ -117,7 +116,7 @@ class DepthRecognintion:
         label2 = ttk.Label(self.main, text=":المحاولة الاختبارية",font = self.labelFont).place(x=380, y= 125)
         num2 = ttk.Label(self.main, text=self.data_test[0],font = self.labelFont).place(x=340, y= 125)
         label2 = ttk.Label(self.main, text=":المحاولة الاختبارية*2",font = self.labelFont).place(x=380, y= 150)
-        num2 = ttk.Label(self.main, text=self.data_test[1],font = self.labelFont).place(x=340, y= 125)   
+        num2 = ttk.Label(self.main, text=self.data_test[1],font = self.labelFont).place(x=340, y= 150)   
         adress_label.place(x=250, y=15)
         res_label = ttk.Label(self.main, text=f"{self.data_test[2]} :الدرجة",font = self.addressFont).place(x = 350,y = 175)
         restart_test_btn =  ttk.Button(self.main,text="حفظ",width=10, command=self.submit).place(x= 280,y = 225)  
