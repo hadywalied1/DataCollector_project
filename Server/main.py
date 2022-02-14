@@ -25,7 +25,7 @@ if getattr(sys, 'frozen', False):
 elif __file__:
     application_path = os.path.dirname(__file__)
 
-config_path = os.path.join(application_path, ".\\database.db")
+config_path = os.path.join(application_path, ".\\res\\database.db")
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+ config_path
 db = SQLAlchemy(app)
@@ -430,7 +430,8 @@ def gettingData():
     hostname = socket.gethostname()
     local_ip = socket.gethostbyname(hostname)
     print(request.remote_addr, local_ip)
-    if(request.environ.get('HTTP_X_REAL_IP', request.remote_addr) == local_ip):          
+    if(request.environ.get('HTTP_X_REAL_IP', request.remote_addr) == local_ip
+       or request.environ.get('HTTP_X_REAL_IP', request.remote_addr) == '127.0.0.1'):          
         data = Data.query.all()
         return render_template('getData.html', len = len(data) ,Data=data)
     return render_template('index.html')
@@ -496,7 +497,7 @@ def download_excel():
     print(dataDict)
     df = pd.DataFrame(dataDict,columns=column4)
     print(df)
-    file =  os.path.join(application_path,'data.xlsx')
+    file =  os.path.join(application_path,'.\\res\\data.xlsx')
     excelWriter = pd.ExcelWriter(file, engine='xlsxwriter')
     df.to_excel(excelWriter, sheet_name='Sheet1', startrow=4, header=False)
     workbook  = excelWriter.book
@@ -550,8 +551,145 @@ def download_excel():
     excelWriter.save()
     return send_file(file, as_attachment=True)
 
+@app.route("/upload", methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        print(request.files['file'])
+        f = request.files['file']
+        data_xls = pd.read_excel(f)
+        importData(data_xls)    
+        return '''
+    <!doctype html>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <div class="row " dir="rtl">
+    <div class="col-lg-3 ">
+    </div>
+     <div class="col-lg-6 text-center">
+        <title>Upload an excel file</title>
+        <h1 >تم رفع الملف بنجاح</h1>
+        <button class="btn btn-success" style="margin-top:20px;" onclick='location.href = "/gettingData"' type="button">
+                            <span>عرض البيانات</span>
+        </button>
+    </div>
+    </div>
+
+    '''
+    return '''
+    <!doctype html>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <div class="row " dir="rtl">
+    <div class="col-lg-3 ">
+    </div>
+    <div class="col-lg-6 text-center">
+        <title>Upload an excel file</title>
+        <h1 >رفع ملف الاكسل </h1>
+        <form action="" method=post enctype=multipart/form-data>
+        <div class="form-group">
+        <p><input class="form-control" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="margin-top:20px;"  type=file class="form-control" name=file>
+        <input  class="btn btn-primary" style="margin-top:20px;" type=submit value=رفع>
+        </div>
+        </div>
+        
+    </div>
+     </form>
+    '''
+def importData(df):
+    Data.query.delete()
+    
+    df.drop([0,1,2], inplace = True)
+    df.columns = [
+                '#',
+                'id',
+                'name',
+                'height',
+                'weight',
+                'effortMarkData',
+                'effortTimeData', 
+                'rightHandGripData',
+                'leftHandGripData', 
+                'legsAndBackData' ,
+                'firstWrongCount',
+                'firstTotalTime',
+                'firstAvg',
+                'secondWrongCount',
+                'secondTotalTime',
+                'secondAvg',
+                'thirdWrongCount',
+                'thirdTotalTime',
+                'thirdAvg',
+                'handStabilityDegree',
+                'rightEarDegree',
+                'rightEarTones',
+                'leftEarDegree',
+                'leftEarTones',
+                'depthTrialTrain', 
+                'depthTrial1', 
+                'depthTrial2', 
+                'depthData', 
+                'firstArmsErrors', 
+                'firstArmsTime', 
+                'firstArmsAverage',
+                'secondArmsErrors', 
+                'secondArmsTime', 
+                'secondArmsAverage',
+                'thirdArmsErrors', 
+                'thirdArmsTime', 
+                'thirdArmsAverage',
+                'armsData'
+    ]
+    for index, row in df.iterrows():
+        data = Data(
+            id = row["id"], name = row["name"],
+            height = row["height"], weight = row["weight"],
+            effortMarkData = row["effortMarkData"], effortTimeData = row["effortTimeData"],
+            rightHandGripData = row["rightHandGripData"], leftHandGripData = row["leftHandGripData"],
+            legsAndBackData = row["legsAndBackData"], firstWrongCount = row["firstWrongCount"],
+            firstTotalTime = row["firstTotalTime"], firstAvg = row["firstAvg"],
+            secondWrongCount = row["secondWrongCount"], secondTotalTime = row["secondTotalTime"],
+            secondAvg = row["secondAvg"], thirdWrongCount = row["thirdWrongCount"],
+            thirdTotalTime = row["thirdTotalTime"], thirdAvg = row["thirdAvg"],
+            handStabilityDegree = row["handStabilityDegree"], rightEarDegree = row["rightEarDegree"],
+            rightEarTones = row["rightEarTones"], leftEarDegree = row["leftEarDegree"],
+            leftEarTones = row["leftEarTones"], depthTrialTrain = row["depthTrialTrain"],
+            depthTrial1 = row["depthTrial1"], depthTrial2 = row["depthTrial2"],
+            depthData = row["depthData"], firstArmsErrors = row["firstArmsErrors"],
+            firstArmsTime = row["firstArmsTime"], firstArmsAverage = row["firstArmsAverage"],
+            secondArmsErrors = row["secondArmsErrors"], secondArmsTime = row["secondArmsTime"],
+            secondArmsAverage = row["secondArmsAverage"], thirdArmsErrors = row["thirdArmsErrors"],
+            thirdArmsTime = row["thirdArmsTime"], thirdArmsAverage = row["thirdArmsAverage"],
+            armsData = row["armsData"]
+                    )
+        db.session.add(data)
+        print(type(row))
+    db.session.commit()
+
+@app.route("/delete", methods=['GET', 'POST'])
+def delete_all():    
+    Data.query.delete()
+    db.session.commit()
+    return    '''
+     <!doctype html>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <div class="row " dir="rtl">
+    <div class="col-lg-3 ">
+    </div>
+     <div class="col-lg-6 text-center">
+        <title>Deleted Successfully </title>
+        <h1 >تم مسح البيانات بنجاح</h1>
+        <button class="btn btn-success" style="margin-top:20px;" onclick='location.href = "/gettingData"' type="button">
+                            <span>عرض البيانات</span>
+        </button>
+    </div>
+    </div>
+    '''
 
 if __name__ == "__main__":
+    # ensure the instance folder exists
+    try:
+        os.makedirs(application_path+"\\res")
+    except OSError:
+        pass
+
     db.create_all()
-    app.run(debug = True, host="0.0.0.0", use_reloader = True)
+    app.run(debug = False, host="0.0.0.0", use_reloader = False)
     

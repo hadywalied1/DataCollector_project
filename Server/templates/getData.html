@@ -4,6 +4,9 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/fontawesome.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
     <style>
         table {
             display: block;
@@ -62,14 +65,31 @@
         }
     </style>
 </head>
-
+<script>
+    function deleteAlert()
+    {
+        var answer = window.confirm('Are you sure you want to delete data?');
+        if (answer) {
+            location.href = "/delete";
+        }
+    }
+   
+</script>
 <body>
     <div class="column" style="width: 99%; ">
         <div class=" row " >
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <button class="btn btn-success" onclick='location.href = "/download_excel"' type="button">
-                        <span>تنزيل البيانات</span>
+                    
+                    <button class="btn btn-primary" onclick='location.href = "/download_excel"' type="button">
+                        <span>تنزيل البيانات <i class="fa-thin fa-trash-can-list" style="font-size:24px;color: #ffffff;"></i></span>
+                    </button>
+                    <button class="btn btn-success" onclick='location.href = "/upload"' type="button">
+                        <span>رفع البيانات</span>
+                    </button>
+                    
+                    <button class="btn btn-danger" onclick='deleteAlert()' type="button">
+                        <span>مسح كل البيانات</span>
                     </button>
                 </div>
             </nav>
