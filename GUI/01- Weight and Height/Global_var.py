@@ -1,4 +1,7 @@
     
+from os import device_encoding
+
+
 def init_globals():
     global mil_id
     global name
@@ -8,3 +11,5 @@ def init_globals():
     name=""
     ip=0
     COMport = 0
+    se = None
+    device_connected = False

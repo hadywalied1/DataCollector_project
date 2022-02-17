@@ -1,12 +1,21 @@
+import os
+import sys
 import tkinter as tk
 from tkinter import messagebox
 import requests
 import json
 # this function used to read saved IP from 
+# determine if application is a script file or frozen exe
+if getattr(sys, 'frozen', False):
+    application_path = os.path.dirname(sys.executable)
+elif __file__:
+    application_path = os.path.dirname(__file__)
+    
 def readIP():
     ip = None
     try:
-        file = open("defaultIP.txt",'r')
+        p = os.path.join(application_path,"defaultIP.txt")
+        file = open(p,'r')
         ip = file.readline()
         file.close()
     except Exception:
@@ -15,7 +24,8 @@ def readIP():
 
 # this function used to write the new ip setting sto defaultP.txt file
 def writeIP(ip):
-    file = open("defaultIP.txt","w+")
+    p = os.path.join(application_path,"defaultIP.txt")
+    file = open(p,"w+")
     file.write(ip)
     file.close()
 
@@ -23,7 +33,8 @@ def writeIP(ip):
 def readCOM():
     com = None
     try:
-        file = open("defaultCOM.txt",'r')
+        p = os.path.join(application_path,"defaultCOM.txt")
+        file = open(p,'r')
         com = file.readline()
         file.close()
     except Exception:
@@ -32,7 +43,8 @@ def readCOM():
 
 # this function used to write the new ip setting sto defaultP.txt file
 def writeCOM(com):
-    file = open("defaultCOM.txt","w+")
+    p = os.path.join(application_path,"defaultCOM.txt")
+    file = open(p,"w+")
     file.write(com)
     file.close()
     

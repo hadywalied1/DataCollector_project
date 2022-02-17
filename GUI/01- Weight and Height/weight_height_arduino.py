@@ -23,7 +23,6 @@ class weightHeight:
     next_frame = None
     weights = []
     heights = []
-    device_connected = True
     weight_text = None
     height_text = None
     submit_button = None
@@ -44,10 +43,6 @@ class weightHeight:
         self.main.geometry("600x300")
         self.main.minsize(600,300)
         self.main.maxsize(600,300)
-        try:
-            self.se = ser.Serial(f'COM{Global_var.COMport}', 9600, timeout=1)
-        except Exception:
-            self.device_connected = False
         adress_label = ttk.Label(self.main, text="تسجيل الطول و الوزن",font = self.addressFont)
         id_label = ttk.Label(self.main, text=f"{Global_var.mil_id} :الرقم العسكري",font = self.labelFont).place(x = 300,y = 50)
         name_label = ttk.Label(self.main, text=":الاسم",font = self.labelFont).place(x = 457,y = 75)
@@ -67,7 +62,7 @@ class weightHeight:
         self.start_thread()
     
     def start_thread(self):
-        if self.device_connected:
+        if Global_var.device_connected:
             t1=th.Thread(target=self.start_lestining)
             self.stop_thread = False
             t1.daemon = True
@@ -92,35 +87,37 @@ class weightHeight:
     def start_lestining(self):
         self.submit_button['state'] = tk.DISABLED
         self.restart_test['state'] = tk.DISABLED
-        start = int(time.time())
         time.sleep(5)
-        
-        while int(time.time()) - start < 5:
-            s = self.se.readline()
+        start = int(time.time())
+        while int(time.time()) - start < 3:
+            s = Global_var.se.readline()
             s = s.decode('UTF-8')
             d = s.split(":")
+
             if d[0] == "Weight":
                 d[1] = d[1].strip()
-                self.weights.append(round(float(d[1]),2))
+                if float(d[1]) > 30.0:
+                    self.weights.append(round(float(d[1]),2))
             elif d[0] == "Length":
                 d[1] = d[1].strip()
-                self.heights.append(round(float(d[1]),1))
+                if float(d[1]) > 60.0:
+                    self.heights.append(round(float(d[1]),1))
         self.calculate_median()
         self.change_text()
         self.submit_button['state'] = tk.NORMAL
         self.restart_test['state'] = tk.NORMAL
     
     def calculate_median(self):
-        self.weight = NP.median(self.weights)
-        self.height = NP.median(self.heights)
+        self.weight_median = round(NP.median(NP.array(self.weights)))
+        self.height_median = round(NP.median(NP.array(self.heights)))
     
     def change_text(self):
         if self.weight_median != 0:
             self.weight_text.delete(0,"end")
-            self.weight_text.insert(0,"{:.2f}".format(self.weight_median))
+            self.weight_text.insert(0,self.weight_median)
         if self.height_median != 0:
             self.height_text.delete(0,"end")
-            self.height_text.insert(0,"{:.2f}".format(self.height_median))            
+            self.height_text.insert(0,self.height_median)            
     
     def formulate_data(self,id,name,height,weight):
         data = {
@@ -135,11 +132,14 @@ class weightHeight:
         data = get_inputs(self.main)
         flag,msg = self.validations(data)
         if flag:
+            Global_var.se.close()
             data = self.formulate_data(Global_var.mil_id,Global_var.name,data[0],data[1])
             send_request(data,Global_var.ip,"weightHeight")
-            self.next_frame = GUI_Template.InforamtionPage(self.main,self)
+            self.next_frame = GUI_Template.InforamtionPage(self.main,self,True)
+            self.reset()
             transete(self.main,self.next_frame)
             reset_inputs(self.main)
+
             
 root = ThemedTk(theme="breeze")
 wh = weightHeight(root)

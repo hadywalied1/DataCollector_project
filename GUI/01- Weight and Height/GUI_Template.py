@@ -6,7 +6,7 @@ from Helper_module import readCOM, writeCOM
 import Global_var
 from click import option
 from Helper_module import validate_all_fields, validate_id, validate_name
-
+import serial as ser
 from Helper_module import readIP, writeIP, get_inputs, reset_inputs,transete
 
 class InforamtionPage:
@@ -30,6 +30,12 @@ class InforamtionPage:
         self.default_COMport = readCOM()
         Global_var.ip = self.default_server_address
         Global_var.COMport = self.default_COMport
+        try:
+            Global_var.se = ser.Serial(f'COM{Global_var.COMport}', 9600, timeout=1)
+            Global_var.device_connected = True  
+        except Exception as e:
+            print(e)
+            Global_var.device_connected = False    
         addressFont = tkFont.Font(family="Andalus", size=20, weight="bold") 
         labelFont = tkFont.Font(family="Arabic Typesetting", size=16, weight="bold") 
         adress_label = ttk.Label(self.main, text="تسجيل بيانات المختبر",font = addressFont)
@@ -71,8 +77,13 @@ class InforamtionPage:
     def set_com(self,com_entry):
         com= com_entry.get()
         self.default_server_address = com
-        Global_var.ip = com
+        Global_var.COMport = com
         writeCOM(com)
+        try:
+            Global_var.se = ser.Serial(f'COM{Global_var.COMport}', 9600, timeout=1)
+            Global_var.device_connected = True  
+        except Exception:
+            Global_var.device_connected = False  
                     
     def ip_window(self):
         ip_win = tk.Toplevel(self.main)
