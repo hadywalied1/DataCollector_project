@@ -290,7 +290,7 @@
                                 {% if Data[i].firstAvg == None %}
                                 <span>-</span>
                                 {% else %}
-                                {{Data[i].firstAvg}}
+                                {{'%0.2f' % Data[i].firstAvg |float}}
                                 {% endif %}
                             </td>
 
@@ -314,7 +314,7 @@
                                 {% if Data[i].secondAvg == None %}
                                 <span>-</span>
                                 {% else %}
-                                {{Data[i].secondAvg}}
+                                {{'%0.2f' % Data[i].secondAvg|float}}
                                 {% endif %}
                             </td>
 
@@ -338,7 +338,7 @@
                                 {% if Data[i].thirdAvg == None %}
                                 <span>-</span>
                                 {% else %}
-                                {{Data[i].thirdAvg}}
+                                {{'%0.2f' % Data[i].thirdAvg|float}}
                                 {% endif %}
                             </td>
 

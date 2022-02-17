@@ -143,6 +143,6 @@ class weightHeight:
             
 root = ThemedTk(theme="breeze")
 wh = weightHeight(root)
-master = GUI_Template.InforamtionPage(root,wh)
+master = GUI_Template.InforamtionPage(root,wh,True)
 master.window()
 root.mainloop()  
