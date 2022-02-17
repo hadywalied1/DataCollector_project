@@ -1,3 +1,4 @@
+import time
 import tkinter as tk
 from tkinter import messagebox
 import tkinter.ttk as ttk
@@ -62,11 +63,13 @@ class InforamtionPage:
         submit_button = ttk.Button(self.main,text="بدأ الاختبار",width=10, command=self.submit_main_data)
         submit_button.place(x= 250,y = 200)    
     
-    def set_ip(self,ip_entry):
+    def set_ip(self,ip_entry,win):
         ip= ip_entry.get()
         self.default_server_address = ip
         Global_var.ip = ip
         writeIP(ip)
+        time.sleep(0.5)
+        win.destroy()
     
     def set_com(self,com_entry):
         com= com_entry.get()
@@ -83,7 +86,7 @@ class InforamtionPage:
         ip_text.delete(0, "end")
         ip_text.insert(0, self.default_server_address)
         ip_text.place(x=85, y= 10)
-        ip_btn = ttk.Button(ip_win, text="حفظ",width=8, command=lambda: self.set_ip(ip_text))
+        ip_btn = ttk.Button(ip_win, text="حفظ",width=8, command=lambda: self.set_ip(ip_text,ip_win))
         ip_btn.place(x=100, y=60)
 
     def COMport_window(self):

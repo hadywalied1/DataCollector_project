@@ -94,11 +94,10 @@ class handStability:
                 return 4
         
     def grade_btn_action(self):
-        global stop_thread
         if len(self.error_text.get()) == 0 or len(self.error_time_text.get()) == 0:
             messagebox.showerror("خطأ","يجب ملئ كل الخانات")
         else:
-            stop_thread = True
+            self.stop_thread = True
             clear_window(self.main)
             self.calculate_average()
             gradee = self.calculate_grade(self.tot_err_avg,self.tot_time_avg)
@@ -139,7 +138,7 @@ class handStability:
                     average[idx] = tm[idx]/count[idx]
                 else:
                     average[idx] = 0
-                if stop_thread:
+                if self.stop_thread:
                     break
                 self.error_text.delete(0,"end")
                 self.error_time_text.delete(0,"end")
@@ -152,12 +151,11 @@ class handStability:
         self.error_text.place(x = 400,y = 125)
         self.error_time_text = ttk.Entry(self.main,width=5)
         self.error_time_text.place(x = 170,y = 125)
-        '''if self.device_connected:
+        if self.device_connected:
             t1=th.Thread(target=self.start_lestining,args=(self.test_counters,self.test_times,self.test_averages,self.test_counter))
             self.stop_thread = False
             t1.daemon = True
             t1.start()
-        '''
         
         test_label = ttk.Label(self.main, text=f"الاختبار {self.tests[self.test_counter]}",font = self.addressFont)
         self.test_counter+=1
@@ -184,14 +182,14 @@ class handStability:
                 "id":Global_var.mil_id,
                 "name":Global_var.name,
                 "firstWrongCount":int(self.test_counters[0]),
-                "firstTotalTime":float(self.test_times[0]),
-                "firstAvg": float(self.test_averages[0]), 
+                "firstTotalTime":round(self.test_times[0],2),
+                "firstAvg": round(self.test_averages[0],2), 
                 "secondWrongCount":int(self.test_counters[1]),
-                "secondTotalTime":float(self.test_times[1]),
-                "secondAvg": float(self.test_averages[1]),
+                "secondTotalTime":round(self.test_times[1],2),
+                "secondAvg": round(self.test_averages[1],2),
                 "thirdWrongCount":int(self.test_counters[2]),
-                "thirdTotalTime":float(self.test_times[2]),
-                "thirdAvg": float(self.test_averages[2]),
+                "thirdTotalTime":round(self.test_times[2],2),
+                "thirdAvg": round(self.test_averages[2],2),
                 "handStabilityDegree": int(grade)
         }
         return data

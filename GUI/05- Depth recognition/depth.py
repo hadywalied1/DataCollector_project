@@ -70,6 +70,7 @@ class DepthRecognintion:
         else:
             self.result_btn()  
         t1 = th.Thread(target=self.get_depth_data, args=(self.test_counter))
+        t1.daemon = True
         t1.start()   
               
     def get_depth_data(self, test_count):
@@ -105,7 +106,6 @@ class DepthRecognintion:
         result_btn = ttk.Button(self.main,text="اظهار النتيجة",width=10, command=lambda:self.result_window())            
         result_btn.place(x= 250,y = 200)
         
-
     def result_window(self):
         clear_window(self.main)
         adress_label = ttk.Label(self.main, text="النتيجة",font = self.addressFont)
@@ -135,7 +135,7 @@ class DepthRecognintion:
 
     def submit(self):
         data = self.formulate_data()
-        send_request(data,Global_var.ip,"arms")# CHANGE
+        send_request(data,Global_var.ip,"depth")
         time.sleep(0.5)
         self.next_frame = GUI_Template.InforamtionPage(self.main,self,True)
         transete(self.main,self.next_frame)

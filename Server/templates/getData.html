@@ -54,8 +54,8 @@
         }
 
         #name {
-            padding-left: 70px;
-            padding-right: 70px;
+            padding-left: 100px;
+            padding-right: 100px;
         }
 
         .bg-4 {
@@ -81,8 +81,8 @@
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
                     
-                    <button class="btn btn-primary" onclick='location.href = "/download_excel"' type="button">
-                        <span>تنزيل البيانات <i class="fa-thin fa-trash-can-list" style="font-size:24px;color: #ffffff;"></i></span>
+                    <button class="btn btn-primary" onclick='location.href = "/download_excel"' type="button" width="100">
+                        <span>تنزيل البيانات </span>
                     </button>
                     <button class="btn btn-success" onclick='location.href = "/upload"' type="button">
                         <span>رفع البيانات</span>
@@ -229,7 +229,21 @@
                                 {{Data[i].weight}}
                                 {% endif %}
                             </td>
+                            <td>
+                                {% if Data[i].effortMarkData == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].effortMarkData}}
+                                {% endif %}
+                            </td>
 
+                            <td>
+                                {% if Data[i].effortTimeData == None %}
+                                <span>-</span>
+                                {% else %}
+                                {{Data[i].effortTimeData}}
+                                {% endif %}
+                            </td>
                             <td>
                                 {% if Data[i].leftHandGripData == None %}
                                 <span>-</span>
@@ -254,21 +268,7 @@
                                 {% endif %}
                             </td>
 
-                            <td>
-                                {% if Data[i].effortMarkData == None %}
-                                <span>-</span>
-                                {% else %}
-                                {{Data[i].effortMarkData}}
-                                {% endif %}
-                            </td>
-
-                            <td>
-                                {% if Data[i].effortTimeData == None %}
-                                <span>-</span>
-                                {% else %}
-                                {{Data[i].effortTimeData}}
-                                {% endif %}
-                            </td>
+                          
 
                             <td>
                                 {% if Data[i].firstWrongCount == None %}

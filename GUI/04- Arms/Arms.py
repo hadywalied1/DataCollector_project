@@ -61,6 +61,7 @@ class handResestance:
         self.error_time_text = None
         self.time_text = None
         self.device_connected = True
+        
     def submit(self,grade):
         data = self.formulate_data(grade)
         send_request(data,Global_var.ip,"arms")# CHANGE
@@ -166,13 +167,11 @@ class handResestance:
         self.error_text.place(x = 360,y = 125)
         self.error_time_text = ttk.Entry(self.main,width=5)
         self.error_time_text.place(x = 140,y = 125)
-        '''
         if self.device_connected:
             t1=th.Thread(target=self.start_lestining,args=(self.test_counters,self.test_times,self.test_averages,self.test_counter))
             self.stop_thread = False
             t1.daemon = True
             t1.start()
-        '''
         self.timer_start = time.time()
         test_label = ttk.Label(self.main, text=f"الاختبار {self.tests[self.test_counter]}",font = self.addressFont)
         self.test_counter+=1
@@ -199,14 +198,14 @@ class handResestance:
                 "id":Global_var.mil_id,
                 "name":Global_var.name,
                 "firstArmsErrors":int(self.test_counters[0]),
-                "firstArmsTime":float(self.test_times[0]),
-                "firstArmsAverage": float(self.test_averages[0]), 
+                "firstArmsTime":round(self.test_times[0],2),
+                "firstArmsAverage": round(self.test_averages[0],2), 
                 "secondArmsErrors":int(self.test_counters[1]),
-                "secondArmsTime":float(self.test_times[1]),
-                "secondArmsAverage": float(self.test_averages[1]),
+                "secondArmsTime":round(self.test_times[1],2),
+                "secondArmsAverage": round(self.test_averages[1],2),
                 "thirdArmsErrors":int(self.test_counters[2]),
-                "thirdArmsTime":float(self.test_times[2]),
-                "thirdArmsAverage": float(self.test_averages[2]),
+                "thirdArmsTime":round(self.test_times[2],2),
+                "thirdArmsAverage": round(self.test_averages[2],2),
                 "armsData": int(grade)
             }
         return data
